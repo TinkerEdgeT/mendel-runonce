@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Expansions of unset variables cause an error
+set -u
+
 # Given a script and it's content SHA-1, determine if it should run based upon
 # whether its content has changed.
 #
@@ -8,9 +11,10 @@
 function should-run-script {
     local script="$1"; shift
     local script_sha1="$1"; shift
+    local script_basename=$(basename "${script}")
     
-    if [[ -f /var/cache/runonce/$fname ]]; then
-        previous_sha1=$(cat /var/cache/runonce/$fname)
+    if [[ -f /var/cache/runonce/$script_basename ]]; then
+        previous_sha1=$(cat /var/cache/runonce/$script_basename)
 
         if [[ $script_sha1 == $previous_sha1 ]]; then
             return 1
@@ -33,8 +37,9 @@ function main {
         $script
 
         if [[ $? == 0 ]]; then
-            local fname=$(basename $script)
-            echo $script_sha1 > /var/cache/runonce/$fname
+            local script_basename=$(basename $script)
+            echo $script_sha1 > /var/cache/runonce/$script_basename
+            sync /var/cache/runonce/$script_basename
         fi
     done
 }
