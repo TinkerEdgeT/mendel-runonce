@@ -1,5 +1,5 @@
-runonce (0.1) UNRELEASED; urgency=medium
+runonce (1-1) mendel-beaker; urgency=medium
 
   * Initial release.
 
- -- AIY Projects <support-aiyprojects@google.com>  Fri, 04 Jan 2019 15:15:00 -0800
+ -- AIY Projects <support-aiyprojects@google.com>  Wed, 16 Jan 2019 12:00:00 -0800
