@@ -1,8 +1,9 @@
 Source: runonce
 Maintainer: Coral <coral-support@google.com>
-Build-Depends: debhelper
+Build-Depends: debhelper (>=10), dh-systemd
 Section: misc
 Priority: optional
+Standards-Version: 3.9.8
 
 Package: runonce
 Section: misc
